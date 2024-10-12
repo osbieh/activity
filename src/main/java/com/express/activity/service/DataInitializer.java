@@ -28,7 +28,7 @@ public class DataInitializer {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//    @PostConstruct
+   // @PostConstruct
     public void init() {
         // Create Privileges
         Privilege readPrivilege = new Privilege("READ_PRIVILEGE");
@@ -52,12 +52,16 @@ public class DataInitializer {
         user1.setUsername("user1");
         user1.setPassword(passwordEncoder.encode("123"));
         user1.setRoles(Arrays.asList(customerRole));
+        user1.setMobileNo("0568000586");
+        user1.setEmail("user1@ccc.net");
         userRepository.save(user1);
 
         AppUser user2 = new AppUser();
         user2.setUsername("user2");
         user2.setPassword(passwordEncoder.encode("123"));
         user2.setRoles(Arrays.asList(sellerRole));
+        user2.setMobileNo("05999999999");
+        user2.setEmail("user2@ccc.net");
         userRepository.save(user2);
 
         AppUser user3 = new AppUser();

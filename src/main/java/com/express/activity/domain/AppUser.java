@@ -16,6 +16,11 @@ public class AppUser {
     private Long id;
     private String username;
     private String password;
+
+    private String mobileNo;
+    private String email;
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -50,7 +55,9 @@ public class AppUser {
     CREATE TABLE app_user (
             id BIGINT PRIMARY KEY DEFAULT nextval('app_user_seq'),
     username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+   mobile_no VARCHAR(255) ,
+   email VARCHAR(255)
 );
 
     ALTER TABLE app_user
