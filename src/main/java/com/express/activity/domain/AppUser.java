@@ -78,12 +78,12 @@ public class AppUser {
     START WITH 1;
 
     CREATE TABLE app_role (
-            id BIGINT PRIMARY KEY DEFAULT nextval('app_role_seq'),
+   id BIGINT PRIMARY KEY DEFAULT nextval('app_role_seq'),
     name VARCHAR(255) NOT NULL
 );
 
     CREATE TABLE app_user (
-            id BIGINT PRIMARY KEY DEFAULT nextval('app_user_seq'),
+     id BIGINT PRIMARY KEY DEFAULT nextval('app_user_seq'),
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
    mobile_no VARCHAR(255) ,
