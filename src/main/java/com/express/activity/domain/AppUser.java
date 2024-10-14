@@ -1,7 +1,9 @@
 package com.express.activity.domain;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
+
 
 import java.util.Collection;
 
@@ -10,15 +12,43 @@ import java.util.Collection;
 @Table(name = "app_user")
 @Data
 public class AppUser {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_user_seq")
-    @SequenceGenerator(name = "app_user_seq", sequenceName = "app_user_seq", allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
+
+    @Column(length = 50, unique = true, nullable = false)
     private String username;
+
     private String password;
 
+
     private String mobileNo;
+
+    @Column(length = 50)
+    private String firstName;
+
+
+    @Column(length = 50)
+    private String lastName;
+
+
+    @Column(length = 254, unique = true)
     private String email;
+
+
+    @Column(nullable = false)
+    private boolean activated = false;
+
+
+    @Column(length = 10)
+    private String langKey;
+
+
+    @Column(length = 256)
+    private String imageUrl;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
