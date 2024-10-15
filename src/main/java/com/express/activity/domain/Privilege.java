@@ -9,14 +9,14 @@ import java.util.Collection;
 @Data
 public class Privilege {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "privilege_seq")
-    @SequenceGenerator(name = "privilege_seq", sequenceName = "privilege_seq", allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
 
-    public Privilege(String name) {
+    public Privilege(Long id,String name) {
+        this.id=id;
         this.name = name;
     }
 

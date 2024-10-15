@@ -1,3 +1,5 @@
+drop schema public cascade;
+create schema public;
 
 -- Table to store roles available in the application
 CREATE TABLE app_role (
@@ -9,6 +11,16 @@ CREATE TABLE app_role (
 CREATE TABLE privilege (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
+);
+
+-- Assign privileges to roles (example assignments)
+-- Assuming you have a table to map roles to privileges, e.g., roles_privileges
+CREATE TABLE roles_privileges (
+    role_id BIGINT NOT NULL,
+    privilege_id BIGINT NOT NULL,
+    PRIMARY KEY (role_id, privilege_id),
+    FOREIGN KEY (role_id) REFERENCES app_role(id),
+    FOREIGN KEY (privilege_id) REFERENCES privilege(id)
 );
 
 -- Table to store user information
@@ -115,15 +127,7 @@ INSERT INTO users_roles (user_id, role_id) VALUES
 ((SELECT id FROM app_user WHERE username = 'user3'), (SELECT id FROM app_role WHERE name = 'SUPERVISOR')),
 ((SELECT id FROM app_user WHERE username = 'user4'), (SELECT id FROM app_role WHERE name = 'MANAGER'));
 
--- Assign privileges to roles (example assignments)
--- Assuming you have a table to map roles to privileges, e.g., roles_privileges
-CREATE TABLE roles_privileges (
-    role_id BIGINT NOT NULL,
-    privilege_id BIGINT NOT NULL,
-    PRIMARY KEY (role_id, privilege_id),
-    FOREIGN KEY (role_id) REFERENCES app_role(id),
-    FOREIGN KEY (privilege_id) REFERENCES privilege(id)
-);
+
 
 -- Example privilege assignments
 INSERT INTO roles_privileges (role_id, privilege_id) VALUES
@@ -133,4 +137,3 @@ INSERT INTO roles_privileges (role_id, privilege_id) VALUES
 ((SELECT id FROM app_role WHERE name = 'MANAGER'), (SELECT id FROM privilege WHERE name = 'READ_PRIVILEGE')),
 ((SELECT id FROM app_role WHERE name = 'MANAGER'), (SELECT id FROM privilege WHERE name = 'WRITE_PRIVILEGE')),
 ((SELECT id FROM app_role WHERE name = 'MANAGER'), (SELECT id FROM privilege WHERE name = 'DELETE_PRIVILEGE'));
-

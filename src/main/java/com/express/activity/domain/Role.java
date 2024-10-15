@@ -8,10 +8,10 @@ import java.util.Collection;
 @Entity
 @Table(name = "app_role")
 @Data
+
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_role_seq")
-    @SequenceGenerator(name = "app_role_seq", sequenceName = "app_role_seq", allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ManyToMany(mappedBy = "roles")
@@ -23,8 +23,9 @@ public class Role {
             inverseJoinColumns = @JoinColumn(name = "privilege_id"))
     private Collection<Privilege> privileges;
 
-    public Role(String name) {
+    public Role(Long id,String name) {
         this.name = name;
+        this.id=id;
     }
 
     // Default constructor for JPA
